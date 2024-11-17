@@ -1,28 +1,46 @@
-import 'server-only';
+import "server-only";
 
-import { jwtData } from '@/data-access/entities/auth/JwtData';
-import { Env } from '@/data-access/entities/env/Env';
-import { prisma } from '@/data-access/infra/prisma';
-import bcrypt from 'bcrypt';
+import { jwtData } from "@/data-access/entities/auth/JwtData";
+import { prisma } from "@/data-access/infra/prisma";
+import bcrypt from "bcrypt";
+
+export const AuthDataErrors = {
+  USER_NOT_FOUND: "User not found.",
+} as const;
 
 class AuthData {
-  public async hash(value: string) {
-    return await bcrypt.hash(value, Env.SALT_ROUNDS);
-  }
-
   public async signin(params: { email: string; password: string }) {
     const secret = await prisma.userSecret.findUnique({
       where: {
         email: params.email,
-        passwordHash: await this.hash(params.password),
       },
     });
 
     if (!secret) {
-      throw new Error('User not found.');
+      throw new Error(AuthDataErrors.USER_NOT_FOUND);
     }
 
-    await jwtData.sign(secret.userId);
+    const signinSucceed = await bcrypt.compare(
+      params.password,
+      secret.passwordHash
+    );
+
+    if (!signinSucceed) {
+      throw new Error(AuthDataErrors.USER_NOT_FOUND);
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: secret.userId,
+      },
+    });
+
+    if (!user) {
+      throw new Error(AuthDataErrors.USER_NOT_FOUND);
+    }
+
+    await jwtData.sign(user.id);
+    return user;
   }
 
   public async getUserId() {

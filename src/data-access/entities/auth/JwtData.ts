@@ -1,11 +1,11 @@
-import 'server-only';
+import "server-only";
 
-import { cookieData } from '@/data-access/entities/auth/CookieData';
-import { Env } from '@/data-access/entities/env/Env';
-import { differenceInHours } from 'date-fns';
-import { SignJWT, jwtVerify } from 'jose';
-import { cookies } from 'next/headers';
-import parse from 'parse-duration';
+import { cookieData } from "@/data-access/entities/auth/CookieData";
+import { Env } from "@/data-access/entities/env/Env";
+import { differenceInHours } from "date-fns";
+import { SignJWT, jwtVerify } from "jose";
+import { cookies } from "next/headers";
+import parse from "parse-duration";
 
 class JwtData {
   private secret = new TextEncoder().encode(Env.JWT_SECRET);
@@ -14,7 +14,7 @@ class JwtData {
     const token = await new SignJWT({ sub: userId })
       .setProtectedHeader({ alg: Env.JWT_ALG })
       .setIssuedAt()
-      .setExpirationTime('2d')
+      .setExpirationTime(Env.JWT_EXPIRATION_TIME)
       .sign(this.secret);
 
     const cookieStore = await cookies();
@@ -22,6 +22,7 @@ class JwtData {
       value: token,
       ...cookieData.authCookiePolicy,
     });
+    return token;
   }
 
   public async verify() {
@@ -32,18 +33,25 @@ class JwtData {
       return null;
     }
 
-    let data = await jwtVerify(token.value, this.secret);
-    if (data.payload.exp == null || data.payload.sub == null) {
+    const data = await jwtVerify(token.value, this.secret);
+    return data;
+  }
+
+  public async resetToken() {
+    let data = await this.verify();
+
+    if (!data || data.payload.exp == null || data.payload.sub == null) {
       return null;
     }
 
     // reset token 期間の半分を切ってたらリセットする
     if (
-      (parse(Env.JWT_EXPIRATION_TIME, 'h') ?? 0) / 2 >
-      differenceInHours(new Date(), new Date(data.payload.exp * 1000))
+      (parse(Env.JWT_EXPIRATION_TIME, "h") ?? 0) / 2 >
+      differenceInHours(new Date(data.payload.exp * 1000), new Date())
     ) {
-      await this.sign(data.payload.sub);
-      data = await jwtVerify(token.value, this.secret);
+      console.info("RESET TOKEN");
+      const token = await this.sign(data.payload.sub);
+      data = await jwtVerify(token, this.secret);
       if (data.payload.exp == null || data.payload.sub == null) {
         return null;
       }
