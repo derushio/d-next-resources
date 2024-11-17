@@ -28,4 +28,6 @@ setup:
 	echo '' >> .env.example.dev
 	echo 'TOKEN_COOKIE_DOMAIN="localhost"' >> .env.example.dev
 
+	cp .env.example.dev .env
+
 	pnpm dotenvx run -- pnpm tsx ./src/tools/setupPackageJson.ts
