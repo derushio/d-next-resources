@@ -1,11 +1,11 @@
-import "server-only";
+import 'server-only';
 
-import { jwtData } from "@/data-access/entities/auth/JwtData";
-import { prisma } from "@/data-access/infra/prisma";
-import bcrypt from "bcrypt";
+import { jwtData } from '@/data-access/entities/auth/JwtData';
+import { prisma } from '@/data-access/infra/prisma';
+import bcrypt from 'bcrypt';
 
 export const AuthDataErrors = {
-  USER_NOT_FOUND: "User not found.",
+  USER_NOT_FOUND: 'User not found.',
 } as const;
 
 class AuthData {
@@ -22,7 +22,7 @@ class AuthData {
 
     const signinSucceed = await bcrypt.compare(
       params.password,
-      secret.passwordHash
+      secret.passwordHash,
     );
 
     if (!signinSucceed) {

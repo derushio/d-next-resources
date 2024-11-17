@@ -1,11 +1,11 @@
-import "server-only";
+import 'server-only';
 
-import { cookieData } from "@/data-access/entities/auth/CookieData";
-import { Env } from "@/data-access/entities/env/Env";
-import { differenceInHours } from "date-fns";
-import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
-import parse from "parse-duration";
+import { cookieData } from '@/data-access/entities/auth/CookieData';
+import { Env } from '@/data-access/entities/env/Env';
+import { differenceInHours } from 'date-fns';
+import { SignJWT, jwtVerify } from 'jose';
+import { cookies } from 'next/headers';
+import parse from 'parse-duration';
 
 class JwtData {
   private secret = new TextEncoder().encode(Env.JWT_SECRET);
@@ -46,10 +46,10 @@ class JwtData {
 
     // reset token 期間の半分を切ってたらリセットする
     if (
-      (parse(Env.JWT_EXPIRATION_TIME, "h") ?? 0) / 2 >
+      (parse(Env.JWT_EXPIRATION_TIME, 'h') ?? 0) / 2 >
       differenceInHours(new Date(data.payload.exp * 1000), new Date())
     ) {
-      console.info("RESET TOKEN");
+      console.info('RESET TOKEN');
       const token = await this.sign(data.payload.sub);
       data = await jwtVerify(token, this.secret);
       if (data.payload.exp == null || data.payload.sub == null) {
