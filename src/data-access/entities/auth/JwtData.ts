@@ -1,7 +1,7 @@
 import 'server-only';
 
-import { cookieData } from '@/data-access/entities/Auth/CookieData';
-import { Env } from '@/data-access/entities/Env/Env';
+import { cookieData } from '@/data-access/entities/auth/CookieData';
+import { Env } from '@/data-access/entities/env/Env';
 import { differenceInHours } from 'date-fns';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';

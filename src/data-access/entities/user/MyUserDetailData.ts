@@ -1,6 +1,6 @@
 import "server-only";
 
-import { authData } from "@/data-access/entities/Auth/AuthData";
+import { authData } from "@/data-access/entities/auth/AuthData";
 import { prisma } from "@/data-access/infra/prisma";
 
 class MyUserDetailData {

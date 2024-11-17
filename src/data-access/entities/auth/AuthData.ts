@@ -1,7 +1,7 @@
 import 'server-only';
 
-import { jwtData } from '@/data-access/entities/Auth/JwtData';
-import { Env } from '@/data-access/entities/Env/Env';
+import { jwtData } from '@/data-access/entities/auth/JwtData';
+import { Env } from '@/data-access/entities/env/Env';
 import { prisma } from '@/data-access/infra/prisma';
 import bcrypt from 'bcrypt';
 

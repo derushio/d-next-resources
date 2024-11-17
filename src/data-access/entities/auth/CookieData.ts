@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { Env } from '@/data-access/entities/Env/Env';
+import { Env } from '@/data-access/entities/env/Env';
 
 class CookieData {
   public authCookiePolicy = {
