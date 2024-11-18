@@ -36,7 +36,7 @@ export default async function RootLayout({
         <div className='h-full'>
           <div className='h-12 w-full px-6 bg-primary text-white flex justify-between items-center absolute'>
             <div>
-              <h1>お菓子ちょきん</h1>
+              <h1>サービス名</h1>
             </div>
             <div />
             {myUser && <div>{myUser.name}</div>}
