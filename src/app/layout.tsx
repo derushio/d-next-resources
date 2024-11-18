@@ -33,15 +33,15 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}
       >
-        <div className='h-full flex flex-col'>
-          <div className='flex-none h-12 px-6 bg-primary text-white flex justify-between items-center'>
+        <div className='h-full'>
+          <div className='h-12 w-full px-6 bg-primary text-white flex justify-between items-center absolute'>
             <div>
-              <h1>サービス名</h1>
+              <h1>お菓子ちょきん</h1>
             </div>
             <div />
             {myUser && <div>{myUser.name}</div>}
           </div>
-          <div className='flex-auto'>{children}</div>
+          <div className='h-full pt-12'>{children}</div>
         </div>
       </body>
     </html>
