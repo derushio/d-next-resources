@@ -1,4 +1,4 @@
-import './globals.css';
+import '@/app/globals.css';
 
 import { myUserDetailData } from '@/data-access/entities/user/MyUserDetailData';
 import { resetToken } from '@/server-actions/auth/resetToken';
