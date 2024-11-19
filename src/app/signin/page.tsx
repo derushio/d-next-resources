@@ -1,5 +1,3 @@
-'use server';
-
 import { SigninForm } from '@/components/auth/signin/SigninForm';
 
 export default async function SigninPage() {
