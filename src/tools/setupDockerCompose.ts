@@ -8,7 +8,7 @@ async function main() {
 
   dockerComposeYaml = dockerComposeYaml.replaceAll(
     'd-next-resources-volume',
-    path.basename(process.cwd()),
+    `${path.basename(process.cwd())}-volume`,
   );
 
   await fs.promises.writeFile('./docker/compose.yaml', dockerComposeYaml);
