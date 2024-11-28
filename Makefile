@@ -9,7 +9,7 @@ setup:
 	pnpm add -D prisma
 	# pnpm prisma init
 	pnpm add @prisma/client
-	pnpm add jose bcrypt flowbite-react parse-duration zod date-fns lodash p-queue uuid @paralleldrive/cuid2 typescript-eslint zod-form-data react-icons
+	pnpm add jose bcrypt flowbite-react parse-duration zod date-fns lodash p-queue uuid @paralleldrive/cuid2 typescript-eslint zod-form-data react-icons next-auth react-responsive usehooks-ts
 	pnpm add -D @dotenvx/dotenvx @trivago/prettier-plugin-sort-imports @types/bcrypt @types/lodash @types/uuid eslint eslint-config-prettier npm-run-all prettier tsx
 	
 	echo 'DB_USER="postgres"' > .env.example.dev
@@ -20,13 +20,10 @@ setup:
 	echo '' >> .env.example.dev
 	echo 'DATABASE_URL="postgresql://$${DB_USER}:$${DB_PASSWORD}@$${DB_HOST}:$${DB_PORT}/$${DB_NAME}?schema=public"' >> .env.example.dev
 	echo '' >> .env.example.dev
-	echo 'JWT_SECRET="907f56f1-c8a2-4f9a-a839-384f13c52184"' >> .env.example.dev
-	echo 'JWT_ALG="HS256"' >> .env.example.dev
-	echo 'JWT_EXPIRATION_TIME="7d"' >> .env.example.dev
-	echo '' >> .env.example.dev
-	echo 'SALT_ROUNDS="10"' >> .env.example.dev
-	echo '' >> .env.example.dev
-	echo 'TOKEN_COOKIE_DOMAIN="localhost"' >> .env.example.dev
+	echo 'TOKEN_SALT_ROUNDS="10"' >> .env.example.dev
+	echo 'TOKEN_SECRET="fa438848-fc87-43ca-a2f5-8810f7c4a856"' >> .env.example.dev
+	echo 'TOKEN_MAX_AGE_MINUTES="60"' >> .env.example.dev
+	echo 'TOKEN_UPDATE_AGE_MINUTES="2.5"' >> .env.example.dev
 
 	cp .env.example.dev .env
 

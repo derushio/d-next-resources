@@ -7,6 +7,14 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["typedSql"]
+  output          = "../src/data-accesses/infra/prisma/generated"
+}
+
+generator comments {
+  // 少々クセのある動きをする
+  // generateでも生成されてしまうが、対象のテーブルが未生成の場合migrate:devに失敗するので
+  // その場合は生成されたコメントのmigrationディレクトリとcomments-latest.jsonを消去した上で再度migrate:devを実行するべき
+  provider = "prisma-db-comments-generator"
 }
 
 datasource db {
@@ -14,12 +22,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// ユーザーテーブル
 model User {
   id String @id @default(cuid())
 
   name String
 
-  UserSecret UserSecret?
+  email        String @unique
+  /// salt hash
+  passwordHash String
+
+  UserSession UserSession[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -28,12 +41,18 @@ model User {
   @@index([updatedAt])
 }
 
-model UserSecret {
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
+/// ユーザーのログインセッション
+model UserSession {
+  id String @id @default(cuid())
 
-  email        String @unique
-  passwordHash String
+  User   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId String
+
+  accessTokenHash     String
+  accessTokenExpireAt DateTime
+
+  resetTokenHash     String
+  resetTokenExpireAt DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
