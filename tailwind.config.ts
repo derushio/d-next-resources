@@ -4,6 +4,7 @@ import type { Config } from 'tailwindcss';
 const gap = {
   '0.25em': '0.25em',
   '0.5em': '0.5em',
+  '0.75em': '0.75em',
   '1em': '1em',
   '2em': '2em',
   '3em': '3em',
@@ -46,6 +47,27 @@ const inset = {
   '90%': '90%',
 };
 
+const fontSize = {
+  '50%': '0.500em',
+  '75%': '0.750em',
+  '80%': '0.800em',
+  '85%': '0.850em',
+  '100%': '1.000em',
+  '110%': '1.100em',
+  '120%': '1.200em',
+  '130%': '1.300em',
+  '150%': '1.500em',
+  '160%': '1.600em',
+  '170%': '1.700em',
+  '180%': '1.800em',
+  '190%': '1.900em',
+  '200%': '2.000em',
+  '250%': '2.500em',
+  '300%': '3.000em',
+  '400%': '4.000em',
+  '500%': '5.000em',
+};
+
 export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -82,25 +104,11 @@ export default {
       aspectRatio: {
         a4: '1 / 1.41421356',
       },
-      fontSize: {
-        '50%': '0.500em',
-        '75%': '0.750em',
-        '80%': '0.800em',
-        '85%': '0.850em',
-        '100%': '1.000em',
-        '110%': '1.100em',
-        '120%': '1.200em',
-        '130%': '1.300em',
-        '150%': '1.500em',
-        '200%': '2.000em',
-        '250%': '2.500em',
-        '300%': '3.000em',
-        '400%': '4.000em',
-        '500%': '5.000em',
-      },
+      fontSize: fontSize,
       gap: gap,
       padding: gap,
       margin: gap,
+      letterSpacing: fontSize,
     },
   },
   plugins: [flowbite.plugin()],
