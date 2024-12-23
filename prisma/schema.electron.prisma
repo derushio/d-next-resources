@@ -28,7 +28,7 @@ model User {
   UserSession UserSession[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([createdAt])
   @@index([updatedAt])
@@ -48,7 +48,7 @@ model UserSession {
   resetTokenExpireAt DateTime
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([createdAt])
   @@index([updatedAt])
