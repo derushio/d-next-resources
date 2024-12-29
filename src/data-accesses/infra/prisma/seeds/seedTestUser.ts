@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@/data-accesses/infra/prisma/generated';
 import { upperzero } from '@/data-accesses/types/zod/utils';
+import { genHash } from '@/utils/hash';
 import bcrypt from 'bcrypt';
 import { z } from 'zod';
 
@@ -13,10 +14,7 @@ const user = {
 
 export async function seedTestUser() {
   console.log(user);
-  const hash = await bcrypt.hash(
-    user.password,
-    upperzero(z.number()).parse(Number(process.env.TOKEN_SALT_ROUNDS)),
-  );
+  const hash = await genHash(user.password);
 
   await prisma.$transaction(async (t) => {
     const userData = {
