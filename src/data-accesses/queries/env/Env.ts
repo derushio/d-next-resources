@@ -1,5 +1,3 @@
-import 'server-only';
-
 import { upperzero } from '@/data-accesses/types/zod/utils';
 import { z } from 'zod';
 
