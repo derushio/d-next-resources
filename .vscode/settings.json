@@ -62,6 +62,10 @@
     {
       "filePath": "prisma/migrations",
       "group": "Default"
+    },
+    {
+      "filePath": "src/utils",
+      "group": "Default"
     }
   ],
   "favorites.sortOrder": "ASC"
