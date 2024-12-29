@@ -28,11 +28,9 @@ export const BodyStateContext = createContext<
   sidenavMargin: 'sm:ml-72',
 
   setIsSidenavOpen(value) {
-    value;
     return;
   },
   setIsSidenavHide(value) {
-    value;
     return;
   },
 });
