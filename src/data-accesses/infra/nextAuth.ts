@@ -154,8 +154,6 @@ export const authOptions = {
         password: { type: 'password' },
       },
       async authorize(credentials, req) {
-        req;
-
         const email = credentials?.email;
         const password = credentials?.password ?? '';
         if (email == null) {
@@ -172,7 +170,6 @@ export const authOptions = {
         if (await bcrypt.compare(password, user.passwordHash ?? '')) {
           // パスワード認証OK
           const { passwordHash, ...safeUser } = user;
-          passwordHash;
 
           // セッションを生成
           const newTokenSession = await createNewTokenSession(user.id);
