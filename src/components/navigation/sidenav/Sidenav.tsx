@@ -32,7 +32,7 @@ export function Sidenav({
             </SidebarItem>
           </SidebarItemGroup>
 
-          <SidebarItemGroup className='flex-1' />
+          <SidebarItemGroup className='grow' />
 
           <SidebarItemGroup>
             {isMounted && !auth && (
