@@ -35,11 +35,9 @@ export const ToastStateContext = createContext<
   }
 >({
   toasts: [],
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setToasts(toasts: ReactNode[]) {
     return;
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addToast(toast: ReactNode) {
     return;
   },
