@@ -217,10 +217,8 @@ export async function guardAuth() {
   const auth = await getAuth();
 
   if (!auth) {
-    if (!auth) {
-      const path = (await headers()).get(HEADER_PATH);
-      redirect(`/api/auth/signin?callbackUrl=${path}`);
-    }
+    const path = (await headers()).get(HEADER_PATH);
+    redirect(`/api/auth/signin?callbackUrl=${path}`);
   }
 
   return auth;
