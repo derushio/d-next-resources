@@ -44,3 +44,5 @@ src/data-accesses/infra/prisma/generated
 /dist
 
 /db
+
+.codegpt

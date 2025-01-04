@@ -154,45 +154,52 @@ export const authOptions = {
         password: { type: 'password' },
       },
       async authorize(credentials, req) {
-        const email = credentials?.email;
-        const password = credentials?.password ?? '';
-        if (email == null) {
-          return null;
-        }
-
-        const user = await prisma.user.findUnique({
-          where: { email },
-        });
-        if (user == null) {
-          return null;
-        }
-
-        if (await bcrypt.compare(password, user.passwordHash ?? '')) {
-          // パスワード認証OK
-          const { passwordHash, ...safeUser } = user;
-
-          // セッションを生成
-          const newTokenSession = await createNewTokenSession(user.id);
-
-          return {
-            ...safeUser,
-
-            sub: safeUser.id,
-
-            sessionId: newTokenSession.session.id,
-            accessToken: newTokenSession.accessToken,
-            accessTokenExpireAt: newTokenSession.accessTokenExpireAt,
-            resetToken: newTokenSession.resetToken,
-            resetTokenExpireAt: newTokenSession.resetTokenExpireAt,
-          };
-        } else {
-          return null;
-        }
+        return authorize(credentials);
       },
     }),
   ],
   secret: Env.TOKEN_SECRET,
 } satisfies NextAuthOptions;
+
+export async function authorize(credentials?: {
+  email?: string;
+  password?: string;
+}) {
+  const email = credentials?.email;
+  const password = credentials?.password ?? '';
+  if (email == null) {
+    return null;
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+  if (user == null) {
+    return null;
+  }
+
+  if (await bcrypt.compare(password, user.passwordHash ?? '')) {
+    // パスワード認証OK
+    const { passwordHash, ...safeUser } = user;
+
+    // セッションを生成
+    const newTokenSession = await createNewTokenSession(user.id);
+
+    return {
+      ...safeUser,
+
+      sub: safeUser.id,
+
+      sessionId: newTokenSession.session.id,
+      accessToken: newTokenSession.accessToken,
+      accessTokenExpireAt: newTokenSession.accessTokenExpireAt,
+      resetToken: newTokenSession.resetToken,
+      resetTokenExpireAt: newTokenSession.resetTokenExpireAt,
+    };
+  } else {
+    return null;
+  }
+}
 
 /**
  * Use it in server contexts
