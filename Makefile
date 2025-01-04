@@ -20,6 +20,7 @@ setup:
 	echo '' >> .env.example.dev
 	echo 'DATABASE_URL="postgresql://$${DB_USER}:$${DB_PASSWORD}@$${DB_HOST}:$${DB_PORT}/$${DB_NAME}?schema=public"' >> .env.example.dev
 	echo '' >> .env.example.dev
+	echo 'NEXT_PUBLIC_BASE_URL="http://localhost:3000"' >> .env.example.dev
 	echo 'TOKEN_SALT_ROUNDS="10"' >> .env.example.dev
 	echo "TOKEN_SECRET=\"`openssl rand -base64 32`\"" >> .env.example.dev
 	echo 'TOKEN_MAX_AGE_MINUTES="60"' >> .env.example.dev

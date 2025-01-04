@@ -27,7 +27,7 @@ export async function createUser(
       },
     });
 
-    console.log(Env.BASE_URL);
+    console.log(Env.NEXT_PUBLIC_BASE_URL);
 
     const token = await authorize({
       email: email,
