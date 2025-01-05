@@ -1,0 +1,29 @@
+name: "deploy"
+run-name: "deploy to k8s"
+on:
+  push:
+    branches:
+      - "main"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Docker image build & push
+        working-directory: ./.gitea/scripts
+        run: |
+          ./deploy-image.sh
+      - name: Upgrade k8s next
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: set image deployment/d-next-resources-next-deployment container-0=harbor.derushio.work/d-next-resources/next:${{ env.GITHUB_SHA }} --namespace=d-next-resources
