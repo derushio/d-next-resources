@@ -4,7 +4,7 @@ import { prisma } from '@/data-accesses/infra/prisma';
 import { Env } from '@/data-accesses/queries/env/Env';
 import { HEADER_PATH } from '@/middleware';
 import { uuidv4 } from '@/utils/uuidv4';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { addMinutes } from 'date-fns';
 import {
   GetServerSidePropsContext,

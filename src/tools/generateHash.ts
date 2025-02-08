@@ -1,5 +1,5 @@
 import { upperzero } from '@/data-accesses/types/zod/utils';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 
 // １つ目のパラメータ

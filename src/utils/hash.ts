@@ -1,6 +1,6 @@
 import { Env } from '@/data-accesses/queries/env/Env';
 import { upperzero } from '@/data-accesses/types/zod/utils';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 
 export async function genHash(text: string) {

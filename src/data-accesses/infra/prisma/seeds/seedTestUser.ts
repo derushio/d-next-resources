@@ -1,9 +1,6 @@
 import { prisma } from '@/data-accesses/infra/prisma';
 import { Prisma, PrismaClient } from '@/data-accesses/infra/prisma/generated';
-import { upperzero } from '@/data-accesses/types/zod/utils';
 import { genHash } from '@/utils/hash';
-import bcrypt from 'bcrypt';
-import { z } from 'zod';
 
 const user = {
   name: 'テストユーザー',
