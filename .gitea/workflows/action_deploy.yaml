@@ -13,6 +13,9 @@ jobs:
   deploy:
     runs-on: "ubuntu-latest"
     steps:
+      - name: Set up runner
+        run: |
+          apk update && apk add git docker docker-compose nodejs gpg openssh npm kubectl
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up buildx
@@ -22,8 +25,7 @@ jobs:
         run: |
           ./deploy-image.sh
       - name: Upgrade k8s next
-        uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with:
-          args: set image deployment/d-next-resources-next-deployment container-0=harbor.derushio.work/d-next-resources/next:${{ env.GITHUB_SHA }} --namespace=d-next-resources
+        run: |
+          kubectl --kubeconfig=<(echo "$KUBE_CONFIG") set image deployment/d-next-resources-next-deployment container-0=harbor.example.work/d-next-resources/next:${{ env.GITHUB_SHA }} --namespace=d-next-resources

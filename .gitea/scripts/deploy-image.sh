@@ -7,7 +7,7 @@ proj="d-next-resources"
 commit=`git rev-parse HEAD`
 
 login_docker() {
-  echo "" | docker login harbor.example.com -u "admin" --password-stdin
+  echo "" | docker login harbor.example.com -u "" --password-stdin
 }
 
 next_tag=harbor.example.com/$proj/next:$commit
