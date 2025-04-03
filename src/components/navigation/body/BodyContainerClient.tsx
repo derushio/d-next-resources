@@ -38,7 +38,7 @@ export const BodyStateContext = createContext<
 /**
  * 全体向けContextを生成するためのコンポーネント
  */
-export function BodyClient({ children }: { children: ReactNode }) {
+export function BodyContainerClient({ children }: { children: ReactNode }) {
   const { isMountedDelay } = useIsMountedCheck();
 
   /**
@@ -91,7 +91,6 @@ export function BodyClient({ children }: { children: ReactNode }) {
         ? 'sm:ml-0'
         : bodyState.sidenavMargin,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bodyState.isSidenavHide]);
 
   return (

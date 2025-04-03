@@ -1,12 +1,12 @@
 'use client';
 
-import { BodyStateContext } from '@/components/navigation/body/BodyClient';
+import { BodyStateContext } from '@/components/navigation/body/BodyContainerClient';
 import { useIsMountedCheck } from '@/hooks/useIsMountedCheck';
 import { Button, MegaMenu } from 'flowbite-react';
 import { ReactNode, useContext } from 'react';
 import { HiBars3 } from 'react-icons/hi2';
 
-export function Header({ UserEmail }: { UserEmail: ReactNode }) {
+export function HeaderClient({ UserEmail }: { UserEmail: ReactNode }) {
   const { isMounted } = useIsMountedCheck();
   const { isSidenavOpen, setIsSidenavOpen, isSidenavHide } =
     useContext(BodyStateContext);

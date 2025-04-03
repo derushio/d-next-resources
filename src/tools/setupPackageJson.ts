@@ -29,6 +29,7 @@ async function main() {
     'db:seed': 'pnpm prisma db seed',
     'db:studio': 'pnpm prisma studio --browser google-chrome-stable',
     'hash:generate': 'pnpm dotenvx run -- pnpm tsx ./src/tools/generateHash.ts',
+    "postinstall": "flowbite-react patch",
   };
 
   // Update prisma configuration

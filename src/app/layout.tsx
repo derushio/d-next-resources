@@ -1,25 +1,33 @@
 import { geistMonoFont, geistSansFont } from '@/app/fonts';
 import '@/app/globals.css';
 import { AppToast } from '@/components/atom/general/toast/AppToast';
-import { BodyClient } from '@/components/navigation/body/BodyClient';
-import { BodyServer } from '@/components/navigation/body/BodyServer';
-import { Flowbite, ThemeModeScript, ThemeProps } from 'flowbite-react';
+import { BodyContainer } from '@/components/navigation/body/BodyContainer';
+import { BodyContainerClient } from '@/components/navigation/body/BodyContainerClient';
+import {
+  ThemeConfig,
+  ThemeModeScript,
+  ThemeProvider,
+  createTheme,
+} from 'flowbite-react';
 import type { Metadata } from 'next';
 
 /**
  * flowbiteのtheme設定
  */
-const theme = {
-  theme: {
-    button: {
-      color: {
-        primary: 'bg-primary hover:bg-primary2 text-white',
-        error: 'bg-error hover:bg-error2 text-white',
-        warn: 'bg-warn hover:bg-warn2 text-black',
-      },
+const theme = createTheme({
+  button: {
+    color: {
+      primary: 'bg-primary hover:bg-primary2 text-white',
+      error: 'bg-error hover:bg-error2 text-white',
+      warn: 'bg-warn hover:bg-warn2 text-black',
     },
   },
-} satisfies ThemeProps;
+  sidebar: {
+    root: {
+      base: 'h-full overflow-y-auto overflow-x-hidden rounded-none bg-gray-50 px-3 py-4 dark:bg-gray-800',
+    },
+  },
+});
 
 /**
  * アプリのメタデータ
@@ -46,14 +54,14 @@ export default async function RootLayout({
       <body
         className={`${geistSansFont.className} ${geistMonoFont.className} antialiased h-full`}
       >
-        <Flowbite theme={theme}>
-          <BodyClient>
-            <BodyServer>
+        <ThemeProvider theme={theme}>
+          <BodyContainerClient>
+            <BodyContainer>
               {children}
               <AppToast />
-            </BodyServer>
-          </BodyClient>
-        </Flowbite>
+            </BodyContainer>
+          </BodyContainerClient>
+        </ThemeProvider>
       </body>
     </html>
   );

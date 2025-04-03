@@ -1,25 +1,25 @@
 'use server';
 
 import { UserEmail } from '@/components/atom/user/UserEmail';
-import { Header } from '@/components/navigation/header/Header';
-import { SidenavServer } from '@/components/navigation/sidenav/SidenavServer';
+import { HeaderClient } from '@/components/navigation/header/HeaderClient';
+import { Sidenav } from '@/components/navigation/sidenav/Sidenav';
 import { Spinner } from 'flowbite-react';
 import { ReactNode, Suspense } from 'react';
 
 /**
  * BodyClientからServer Componentに戻すためのコンポーネント
  */
-export async function BodyServer({ children }: { children: ReactNode }) {
+export async function BodyContainer({ children }: { children: ReactNode }) {
   return (
     <>
       <div className='z-50'>
         <Suspense>
-          <SidenavServer />
+          <Sidenav />
         </Suspense>
       </div>
 
       <div className='relative h-full z-0'>
-        <Header
+        <HeaderClient
           UserEmail={
             <Suspense fallback={<Spinner />}>
               <UserEmail />

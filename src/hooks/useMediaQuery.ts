@@ -1,7 +1,8 @@
-import { tailwindConfig } from '@/data-accesses/infra/tailwind';
 import { useMediaQuery } from 'react-responsive';
+// FIXME: 設定値通りにする
+import * as theme from 'tailwindcss/defaultTheme';
 
-const breakpoints = tailwindConfig.theme.screens;
+const breakpoints = theme.default.screens;
 
 type BreakpointKey = keyof typeof breakpoints;
 
