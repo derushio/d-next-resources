@@ -30,6 +30,7 @@ setup:
 
 	pnpm dotenvx run -- pnpm tsx ./src/tools/setupPackageJson.ts
 	pnpm dotenvx run -- pnpm tsx ./src/tools/setupDockerCompose.ts
+	pnpm install
 
 setup-electron: setup
 	pnpm add fs-extra @prisma/migrate
