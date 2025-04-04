@@ -12,7 +12,7 @@ export function HeaderClient({ UserEmail }: { UserEmail: ReactNode }) {
     useContext(BodyStateContext);
 
   return (
-    <MegaMenu className='absolute z-40 h-14 w-full bg-primary text-white overflow-hidden rounded-sm sm:rounded-none'>
+    <MegaMenu className='absolute z-40 h-14 w-full bg-primary text-white overflow-hidden rounded-none sm:rounded-none'>
       <div className='w-full flex justify-between items-center gap-2'>
         <div
           className={`flex-none overflow-hidden sm:w-0 ${isSidenavHide ? 'hidden' : 'block'}`}
