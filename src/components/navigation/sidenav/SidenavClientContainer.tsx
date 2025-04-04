@@ -1,18 +1,12 @@
 'use client';
 
 import { BodyStateContext } from '@/components/navigation/body/BodyContainerClient';
-import { SidenavClient } from '@/components/navigation/sidenav/SidenavClient';
-import { getAuth } from '@/data-accesses/infra/nextAuth';
-import { useContext } from 'react';
+import { ReactNode, useContext } from 'react';
 
 /**
  * サイドバー描画領域
  */
-export function SidenavClientContainer({
-  auth,
-}: {
-  auth: Awaited<ReturnType<typeof getAuth>>;
-}) {
+export function SidenavClientContainer({ children }: { children: ReactNode }) {
   const { isSidenavOpen, setIsSidenavOpen, isSidenavHide } =
     useContext(BodyStateContext);
 
@@ -32,7 +26,7 @@ export function SidenavClientContainer({
         />
       )}
 
-      <SidenavClient auth={auth} />
+      {children}
     </>
   );
 }
