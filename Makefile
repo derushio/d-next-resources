@@ -25,6 +25,8 @@ setup:
 	echo "TOKEN_SECRET=\"`openssl rand -base64 32`\"" >> .env.example.dev
 	echo 'TOKEN_MAX_AGE_MINUTES="60"' >> .env.example.dev
 	echo 'TOKEN_UPDATE_AGE_MINUTES="2.5"' >> .env.example.dev
+	echo '' >> .env.example.dev
+	echo 'NEXTAUTH_URL="http://localhost:3000"' >> .env.example.dev
 
 	cp .env.example.dev .env
 
