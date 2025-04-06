@@ -37,3 +37,8 @@ body {
     display: none;
   }
 }
+
+.h-screen {
+  /* 元々はvh */
+  height: 100svh !important;
+}
