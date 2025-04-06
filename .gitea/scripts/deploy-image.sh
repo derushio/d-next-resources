@@ -4,7 +4,7 @@
 cd "../../"
 
 proj="d-next-resources"
-commit=`git rev-parse HEAD`
+commit=$1
 
 login_docker() {
   echo "" | docker login harbor.example.com -u "" --password-stdin
