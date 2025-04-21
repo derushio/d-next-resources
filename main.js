@@ -21,6 +21,8 @@ async function createWindow() {
     console.error(e);
   }
 
+  process.env.DATABASE_URL = `file:${path.resolve(app.getPath('userData'), 'db', 'db.db')}`;
+
   const migrateDev = new MigrateDev();
   await migrateDev.parse(undefined, {});
 
