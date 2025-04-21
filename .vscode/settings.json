@@ -44,10 +44,6 @@
       "group": "Default"
     },
     {
-      "filePath": "tailwind.config.ts",
-      "group": "Default"
-    },
-    {
       "filePath": "package.json",
       "group": "Default"
     },
