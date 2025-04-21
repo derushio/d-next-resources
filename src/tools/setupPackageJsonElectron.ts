@@ -29,6 +29,8 @@ async function main() {
     afterPack: './afterPack.js', // Specify post-packaging script
   };
 
+  packageJson.prisma = {};
+
   // Write the updated package.json back to the file
   await fs.promises.writeFile(
     packageJsonPath,

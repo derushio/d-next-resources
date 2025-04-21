@@ -7,12 +7,15 @@ const fs = require('fs-extra');
 
 async function afterPack(context) {
   const { appOutDir } = context;
-  const outDir = `${appOutDir}/resources/app.asar.unpacked`;
+  // const outDir = `${appOutDir}/resources/app.asar.unpacked`;
+  // 最近はこちららしい
+  const outDir = `${appOutDir}/resources/app`;
 
   // 必要なファイルを指定してコピー
-  await fs.copy('node_modules', `${appOutDir}/node_modules`, {
-    overwrite: false,
-  });
+  // await fs.copy('node_modules', `${appOutDir}/node_modules`, {
+  //   overwrite: false,
+  // });
+
   await fs.copy('src', `${appOutDir}/src`);
   await fs.copy('main.js', `${appOutDir}/main.js`);
   await fs.copy('public', `${appOutDir}/public`);

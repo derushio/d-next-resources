@@ -21,13 +21,11 @@ async function createWindow() {
     console.error(e);
   }
 
-  process.env.DATABASE_URL = `file:${path.resolve(app.getPath('userData'), 'db', 'db.db')}`;
-
   const migrateDev = new MigrateDev();
-  await migrateDev.parse();
+  await migrateDev.parse(undefined, {});
 
   const seed = new DbSeed();
-  await seed.parse();
+  await seed.parse(undefined, {});
 
   void nextStart({
     port: 3000,

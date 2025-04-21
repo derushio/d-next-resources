@@ -36,7 +36,7 @@ setup:
 
 setup-electron: setup
 	pnpm add fs-extra @prisma/migrate
-	pnpm add -D electron electron-builder
+	pnpm add -D electron electron-builder locate-path
 
 	echo 'node-linker=hoisted' > .npmrc
 	echo 'symlink=false' >> .npmrc
