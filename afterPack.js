@@ -23,7 +23,6 @@ async function afterPack(context) {
   await fs.copy('next.config.ts', `${appOutDir}/next.config.ts`);
   await fs.copy('next-env.d.ts', `${appOutDir}/next-env.d.ts`);
   await fs.copy('postcss.config.mjs', `${appOutDir}/postcss.config.mjs`);
-  await fs.copy('tailwind.config.ts', `${appOutDir}/tailwind.config.ts`);
   await fs.copy('tsconfig.json', `${appOutDir}/tsconfig.json`);
   await fs.copy('package.json', `${appOutDir}/package.json`);
 
