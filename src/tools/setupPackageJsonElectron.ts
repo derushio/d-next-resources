@@ -15,8 +15,9 @@ async function main() {
   packageJson.scripts = {
     ...packageJson.scripts, // Preserve existing scripts
     build: 'pnpm run-p db:migrate:dev next:build',
-    'build:linux': 'pnpm electron-builder --linux --dir',
-    'build:win': 'pnpm electron-builder --win --universal --dir',
+    'build:linux': 'pnpm electron-builder --linux --dir -c electron-build.yaml',
+    'build:win':
+      'pnpm electron-builder --win --universal --dir -c electron-build.yaml',
     'package:linux':
       'pnpm run-s db:migrate:dev db:seed db:generate build build:linux',
     'package:win':
@@ -24,10 +25,7 @@ async function main() {
   };
 
   // Add or update the build configuration
-  packageJson.build = {
-    asar: false, // Disable ASAR packaging
-    afterPack: './afterPack.js', // Specify post-packaging script
-  };
+  packageJson.build = {};
 
   packageJson.prisma = {};
 

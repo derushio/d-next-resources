@@ -35,8 +35,8 @@ setup:
 	pnpm install
 
 setup-electron: setup
-	pnpm add fs-extra @prisma/migrate
-	pnpm add -D electron electron-builder locate-path
+	pnpm add fs-extra @prisma/migrate touch
+	pnpm add -D electron electron-builder locate-path @types/fs-extra @types/touch
 
 	echo 'node-linker=hoisted' > .npmrc
 	echo 'symlink=false' >> .npmrc

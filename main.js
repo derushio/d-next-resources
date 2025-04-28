@@ -2,12 +2,10 @@
  * electron用mainスクリプト
  */
 
-/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 const { BrowserWindow, app } = require('electron');
 const { nextStart } = require('next/dist/cli/next-start');
-const { MigrateDev, DbSeed } = require('@prisma/migrate');
 
 async function createWindow() {
   try {
@@ -23,12 +21,6 @@ async function createWindow() {
 
   process.env.DATABASE_URL = `file:${path.resolve(app.getPath('userData'), 'db', 'db.db')}`;
 
-  const migrateDev = new MigrateDev();
-  await migrateDev.parse(undefined, {});
-
-  const seed = new DbSeed();
-  await seed.parse(undefined, {});
-
   void nextStart({
     port: 3000,
   });
@@ -40,7 +32,7 @@ async function createWindow() {
     height: 600,
   });
 
-  await win.loadURL('http://localhost:3000');
+  await win.loadURL('http://localhost:3000/splash');
 }
 
 void app.whenReady().then(async () => {
